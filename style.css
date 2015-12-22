@@ -1,0 +1,12 @@
+body { padding: 15px; }
+.panel, .form-control, .input-group-addon { border-radius: 1px; }
+.panel { border-color: #3949AB; }
+.panel .panel-heading { background: #3949AB; border-radius: 0; border: 0; }
+.panel-title .fa-stack { font-size: 0.9em; }
+.form-control { box-shadow: none; }
+.form-control[readonly] { background-color: #FAFAFA; }
+.input-group-addon:last-child { background-color: #F50057; border-color: #C51162; color: white; user-select: none; transition: all 200ms; padding: 0; }
+.input-group-addon:last-child:hover { background-color: #D81B60; border-color: #C2185B; color: white; cursor: pointer; }
+.input-group-addon button { padding: 6px 12px; border: 0; background: none; outline: 0; }
+.fa-venus { color: #AB47BC; }
+.fa-mars { color: #1A237E; }

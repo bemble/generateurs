@@ -73,8 +73,8 @@
     return rib + StringUtils.padLeftWithZeros(key, 2);
   };
   // https://en.wikipedia.org/wiki/International_Bank_Account_Number#Structure
-  Generators.iban = function () {
-    var countryCode = StringUtils.randomUpperLetters(2);
+  Generators.iban = function (countryCode) {
+    countryCode = countryCode || StringUtils.randomUpperLetters(2);
     var bban = Generators.rib();
     // Number is too large, need to process string
     var sum = NumberUtils.ibanStringToNumber(bban.toString() + countryCode + '00');
@@ -85,13 +85,19 @@
     var key = 98 - sum % 97;
     return countryCode + StringUtils.padLeftWithZeros(key, 2) + bban;
   };
+  Generators.friban = function () {
+    return Generators.iban('FR')
+  };
   // https://en.wikipedia.org/wiki/ISO_9362#Structure
-  Generators.bic = function() {
+  Generators.bic = function(countryCode) {
     var bankCode = StringUtils.randomUpperLetters(4);
-    var countryCode = StringUtils.randomUpperLetters(2);
+    countryCode = countryCode || StringUtils.randomUpperLetters(2);
     var locationCode = Math.random() > 0.5 ? StringUtils.randomUpperLetters(2) : NumberUtils.getPaddedRandomNumber(99);
     var branchCode = Math.random() < 0.3 ? 'XXX' : (Math.random() > 0.5 ? '' : NumberUtils.getPaddedRandomNumber(999));
     return bankCode + countryCode + locationCode + branchCode;
+  };
+  Generators.frbic = function () {
+    return Generators.bic('FR')
   };
   // https://fr.wikipedia.org/wiki/Syst%C3%A8me_d%27identification_du_r%C3%A9pertoire_des_%C3%A9tablissements#Calcul_et_validit.C3.A9_d.27un_num.C3.A9ro_SIRET
   Generators.siret = function () {
@@ -118,7 +124,9 @@
     this.valueLabels = {
       rib: 'RIB',
       iban: 'IBAN',
+      friban: 'IBAN FR',
       bic: 'BIC',
+      frbic: 'BIC FR',
       siret: 'SIRET'
     };
 
